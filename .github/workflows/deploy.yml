@@ -12,6 +12,7 @@ jobs:
       MONGODB_CLUSTER_ADDRESS: 1
       MONGODB_USERNAME: a
       MONGODB_PASSWORD: b
+      MONGODB_DB_NAME: Barry
     environment: testing
     runs-on: ubuntu-latest
     steps:
@@ -30,12 +31,14 @@ jobs:
         run: npm test
       - name: Output information
         # run: echo "hello"
-        run: echo 'MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}'
+        run: |
+          echo 'MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}'
 
   deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Output information
-        run: |        
-          echo "..."
+        run: |
+          echo 'MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}'
+          echo "MONGODB_NAME:  $MONGODB_DB_NAME"
